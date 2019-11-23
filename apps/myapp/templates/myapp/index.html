@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    .node {
+      cursor: pointer;
+    }
+  
+    .node circle {
+      fill: #fff;
+      stroke: steelblue;
+      stroke-width: 3px;
+    }
+  
+    .node text {
+      font: 12px sans-serif;
+    }
+  
+    .link {
+      fill: none;
+      stroke: #ccc;
+      stroke-width: 2px;
+    }
+  </style>
+  {% load static %}
+</head>
+<body>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo right">Hell's Kitchen</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="http://localhost:8000/new_recipe_form">Add Recipe</a></li>
+        <li>|</li>
+        <li><a href="http://localhost:8000">Reset</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="row">
+    <div class="input-field col s6">
+      <input id="first_ingredient" type="text" class="validate">
+      <label for="first_ingredient">Ingredient to start</label>
+    </div>
+  </div>
+  <button class="btn waves-effect waves-light" type="submit" id="submit_ingredient">Submit
+    <i class="material-icons right">restaurant_menu</i>
+  </button>
+  <a id='get_list' class="waves-effect waves-light btn">Get List</a>
+  <div id='list'></div>
+
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="{% static 'myapp/js/script.js' %}"></script>
+</body>
+</html>

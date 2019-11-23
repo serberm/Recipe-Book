@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="recipe_name" type="text" class="validate">
+          <label>Recipe name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="description" type="text" class="validate">
+          <label>Description</label>
+        </div>
+      </div>
+      <p>Add ingredients:</p>
+      <div class="row">
+        <div id='chips' class="chips input-field col s6">
+        </div>
+      </div>
+      <button class="btn waves-effect waves-light" type="submit" id='submit'>Save
+        <i class="material-icons right">send</i>
+      </button>
+      <a href='http://localhost:8000/' class="waves-effect waves-light btn">Main</a>
+    </form>
+  </div>
+
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('.chips').material_chip();
+      M.updateTextFields();
+
+// gathering data from form including chips in a list and sending with ajax to /add_recipe
+      $('#submit').on('click', function(event) {
+        event.preventDefault();
+        data_to_post = {
+          'chips_data': [],
+          'recipe_name': $('#recipe_name').val(),
+          'description': $('#description').val(),
+        }
+        let chipsObjectValue = $('#chips').material_chip('data');
+        $.each(chipsObjectValue, function(key, value){
+          data_to_post.chips_data.push(value.tag)
+        })
+        $.ajax({
+          url: '/add_recipe',
+          method: 'POST',
+          data: JSON.stringify(data_to_post),
+          dataType: 'json',
+          success: function(event){
+            alert(event)
+          }
+        })
+        });
+      });
+  </script>
+</body>
+</html>
